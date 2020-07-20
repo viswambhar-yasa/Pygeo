@@ -1,4 +1,4 @@
-from objects import Point, Ray, Vector, Sphere, Triangle
+from pygeo.objects import Point, Ray, Vector, Sphere, Triangle
 import numpy as np
 
 def intersect(first_object, second_object):
