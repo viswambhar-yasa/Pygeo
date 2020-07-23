@@ -73,6 +73,8 @@ class Vector:
             return np.dot(self._vector,other._vector)
         if isinstance(other,Point):
             return np.dot(self._vector,other._point)
+        if isinstance(other,float) or isinstance(other,int) :
+            return Vector(self._vector*other)
         return NotImplemented
 
     def __eq__(self, other):
@@ -82,27 +84,37 @@ class Vector:
 
 
 class Ray(Point,Vector):
-    """A ray."""
+    """A ray.
+    origin - input can be an array or point Ex-(0,0,0) or Point((0,1,0))
+    direction -input can be an array or point Ex- (0,1,0) or Point((0,1,0))"""
 
     def __init__(self,origin,direction): 
-        if Point(origin)==Point(direction):
-            self._origin=()
-            self._direction=()
-            raise Exception("The end point and direction should not be same")
+        if not isinstance(origin,Point) :
+            if Point(origin)==Point(direction):
+                self._origin=()
+                self._direction=()
+                raise Exception("The end point and direction should not be same")
+            else:
+                self._origin=Point(origin)
+                self._direction=Point(direction)
+                self._t=self._direction-self._origin
         else:
-            self._origin=Point(origin)
-            self._direction=Point(direction)
-            self._r=self._direction-self._origin
+            if origin==direction:
+                self._origin=()
+                self._direction=()
+                raise Exception("The end point and direction should not be same")
+            else:
+                self._origin=origin
+                self._direction=direction
+                self._t=self._direction-self._origin
 
     def magnitude(self):
-        c=Vector.magnitude((self._r))
+        c=Vector.magnitude((self._t))
         return c
     
     def unit_vector(self):
-        u=Vector.unit_vector((self._r))
-        return u
-    
-
+        u=Vector.unit_vector((self._t))
+        return u    
 
     def __repr__(self):
         return f"Ray{self._origin,self._direction}"
@@ -115,16 +127,25 @@ class Ray(Point,Vector):
 
 
 class Sphere(Point):
-    """A sphere."""
-    def __init__(self,origin,radius):
+    """A sphere.
+    center - input can be an array or point Ex-(0,0,0) or Point((0,1,0))
+    Radius -input can be an array or point Ex- (0,1,0) or Point((0,1,0))"""
+    def __init__(self,center,radius:float):
         if radius<=0:
             raise Exception("Radius cannot be negative or zero")
         else:
-            self._origin=Point(origin)
-            self._radius=radius
+            if not isinstance(center,Point):
+                self._center=Point(center)
+                self._radius=radius
+            elif isinstance(center,Point):
+                self._center=center
+                self._radius=radius
+            else:
+                 raise Exception("Invalid input")
+       
 
     def __repr__(self):
-        return f"Sphere{self._origin,self._radius}"
+        return f"Sphere{self._center,self._radius}"
 
     def area(self):
         area=(4/3)*(m.pi)*(self._radius)**3
@@ -135,17 +156,26 @@ class Sphere(Point):
 
     def __eq__(self,other):
         if isinstance(other,Sphere):
-            return np.array_equal(other._origin,self._origin)& (other._radius==self._radius)
+            return np.array_equal(other._center,self._center)& (other._radius==self._radius)
         return
 
 
 
 class Triangle(Point,Vector):
-    """A triangle."""
-    def __init__(self,vertice1,vertice2,vertice3):  
-        self._v1=Point(vertice1)
-        self._v2=Point(vertice2)
-        self._v3=Point(vertice3)
+    """A triangle. 
+    vertice1 - input can be an array or point Ex-(0,0,0) or Point((0,1,0))
+    vertice2 -input can be an array or point Ex- (0,1,0) or Point((0,1,0))
+    vertice3 -input can be an array or point Ex- (0,1,0) or Point((0,1,0))
+    """
+    def __init__(self,vertice1,vertice2,vertice3): 
+        if isinstance(vertice1,Point):
+            self._v1=vertice1
+            self._v2=vertice2
+            self._v3=vertice3
+        else :
+            self._v1=Point(vertice1)
+            self._v2=Point(vertice2)
+            self._v3=Point(vertice3) 
         self._AB=self._v2-self._v1
         self._BC=self._v3-self._v2
         self._AC=self._v3-self._v1
@@ -175,24 +205,13 @@ class Triangle(Point,Vector):
         Area=np.sqrt((s*(s-a)*(s-b)*(s-c)))
         return Area
     
-    
-"""
-#t=Triangle((0, 0, 0), (0, 0, 0),(0,0,10))
-t=Triangle((0, 0, 0), (0, 10, 0),(0,0,10))
-print(t)
-print(t.sidelengths())
-print(t.area())
-r1 = Ray((0, 0, 0), (0, 0, 0))
-print(r1.magnitude())
-s1 = Sphere((1, 0, 1), 5)
-print(s1.area())
-#s1 = Sphere((1, 0, 1), 0)
-v=Vector((1, 1, 1))
-print(v.unit_vector())
-print(r1)
-p=Point(1)
-print(p)
-v=Vector((1,0,1))
-print(v+p)
-print(p+v)
-"""
+    def __eq__(self,other):
+        a,b,c=self.sidelengths()
+        a1,b1,c1=other.sidelengths()
+        if isinstance(other,Triangle):
+            if (a/b==a1/b1) and (a/c==a1/c1) and (b/c==b1/c1):   
+                return True
+            else: 
+                return False
+        return NotImplemented
+
