@@ -114,3 +114,5 @@ def test_triangle_given_triangles_equal_true():
     t1=Triangle((10, 0, 0), (10, 0, 0),(0,0,10))
     t2=Triangle((0, 0, 0), (0, 10, 0),(0,0,10))
     assert (t1 == t2) is True
+
+    

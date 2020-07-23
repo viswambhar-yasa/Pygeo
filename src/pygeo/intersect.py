@@ -46,43 +46,50 @@ def _intersect_ray_with_sphere(ray, sphere):
 
 
 def _intersect_ray_with_triangle(ray, triangle):
-   
+
     O=ray._origin
-    R=ray._r
-    
+    D=ray._direction
+    ray_line=D-O
+
     A=triangle._v1
-    AB=triangle._AB
-    AC=triangle._AC
+    B=triangle._v2
+    C=triangle._v3
+    AB=B-A
+    #print(AB)
+    AC=C-A 
+    #print(AC)
+    BC=C-B
     Normal=AB.cross(AC)
 
-    NR=Normal*R
-    OA=Normal*(A-O)
+    ND=Normal*ray_line
+    if ND==0:
+        "Triangle and ray are parallel"
+        return 0,[0]
+    distance=Normal*A
+    t=((Normal*O)+distance)/ND
+    if t<0 :
+        return 0,[0]
+    else :
+        intercepts=O+(ray_line)*t
+       # V1=Normal.cross(AB)
+        #if (V1*(intercepts-A))<0:
+         #   return 0,[0]
+       # V2=Normal.cross(BC)
+        #if (V2*(intercepts-B))<0:
+         #   return 0,[0]
+        #V3=Normal.cross(AC)
+        #if(V3*(intercepts-A))<0:
+         #   return 0,[0]
+        return 1,[intercepts]
+    
 
-    if (OA==0):
-        if NR !=0:
-            print("Ray is parallel to the triangle")
-        else:
-            distance=0
-    else:
-        distance=NR/OA
-    if distance==0:
-        print("Ray lies on the triangle")
-        return 2
-    if distance<0:
-        return 0
-    return 1
+   
 
+t = Triangle((1, 0, 0), (0, 1, 0), (0, 0, 1))
+r1 = Ray((0, 0, 0), (1, 1, 1))
+d,output = intersect(r1, t)
+print(output)
 
-
-
-
-r1 = Ray((100, 100, 100), (200, 200, 100))
-s1 = Sphere((0, 0, 0), 5)
-d,intercepts = intersect(r1, s1)
-print(d,intercepts)
-intercepts_analytical = [0]
-d_analytical=0
-print((intercepts == intercepts_analytical) and (d_analytical==d) )
 
 
 
