@@ -83,13 +83,12 @@ def _intersect_ray_with_triangle(ray, triangle):
         return 1,[intercepts]
     
 
-   
-
+'''
 t = Triangle((1, 0, 0), (0, 1, 0), (0, 0, 1))
 r1 = Ray((0, 0, 0), (1, 1, 1))
 d,output = intersect(r1, t)
 print(output)
-
+'''
 
 
 

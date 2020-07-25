@@ -79,12 +79,6 @@ def test_sphere_init_function_point():
     expected=Sphere((0,0,0),5)
     assert (s1 == expected) is True
 
-def test_sphere_init_function_point_rad_zero():
-    s1 = Sphere(Point((0, 0, 0)), 0)
-    expected=NotImplemented
-    assert (s1 == expected) is True
-
-
 def test_sphere_given_spheres_equal_false():
     s1 = Sphere((0, 0, 0), 5)
     s2 = Sphere((0, 0, 0), 6)
@@ -111,8 +105,8 @@ def test_triangle_given_triangles_equal_false():
     assert (t1 == t2) is False
 
 def test_triangle_given_triangles_equal_true():
-    t1=Triangle((10, 0, 0), (10, 0, 0),(0,0,10))
-    t2=Triangle((0, 0, 0), (0, 10, 0),(0,0,10))
+    t1=Triangle((10, 0, 0), (0, 10, 0),(0,0,10))
+    t2=Triangle((10, 0, 0), (0, 10, 0),(0,0,10))
     assert (t1 == t2) is True
 
     

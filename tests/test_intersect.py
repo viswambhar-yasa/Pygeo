@@ -51,7 +51,7 @@ def test_intersect_ray_with_triangle_false():
     t = Triangle((1, 0, 0), (0, 1, 0), (0, 0, 1))
     r1 = Ray((0, 0, 0), (-1, -1, -1))
     d,intercepts = intersect(r1, t)
-    intercepts_analytical = Point([0.3333333333333333, 0.3333333333333333, 0.3333333333333333])
+    intercepts_analytical = [Point([0.3333333333333333, 0.3333333333333333, 0.3333333333333333])]
     d_analytical=1
     assert ((intercepts == intercepts_analytical) and (d_analytical==d) ) is False
 
@@ -60,6 +60,6 @@ def test_intersect_ray_with_triangle_true():
     t = Triangle((1, 0, 0), (0, 1, 0), (0, 0, 1))
     r1 = Ray((0, 0, 0), (1, 1, 1))
     d,intercepts = intersect(r1, t)
-    intercepts_analytical = Point([0.3333333333333333, 0.3333333333333333, 0.3333333333333333])
+    intercepts_analytical = [Point([0.3333333333333333, 0.3333333333333333, 0.3333333333333333])]
     d_analytical=1
     assert ((intercepts == intercepts_analytical) and (d_analytical==d) ) is True

@@ -132,7 +132,7 @@ class Sphere(Point):
     Radius -input can be an array or point Ex- (0,1,0) or Point((0,1,0))"""
     def __init__(self,center,radius:float):
         if radius<=0:
-            raise Exception("Radius cannot be negative or zero")
+            return Exception("Radius cannot be negative or zero")
         else:
             if not isinstance(center,Point):
                 self._center=Point(center)
