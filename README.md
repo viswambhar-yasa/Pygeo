@@ -24,7 +24,7 @@ pytest tests
 to run all the tests for `pygeo`.
 
 
-Tasks
+Implenmented Tasks: 
 -----
 
 1. Implementated the missing `Ray` class. A [ray](https://en.wikipedia.org/wiki/Line_(geometry)#Ray) may be represented as its origin and a direction.
@@ -39,8 +39,7 @@ Tasks
    1. Implemented a `__repr__` method.
    1. Implemented an `__eq__` method that works by comparing both the center and radius of the other sphere. Provided tests for this method.
 
-1. Implemented the missing `_intersect_ray_and_sphere` function. You may follow [this article](https://en.wikipedia.org/wiki/Line%E2%80%93sphere_intersection), 
-but keep in mind that for a ray the parameter `d` mentioned in the article must be larger or equal to zero. Provided tests for this method.
+1. Implemented the missing `_intersect_ray_and_sphere` function. Provided tests for this method.
 
 Also implemented:
 
