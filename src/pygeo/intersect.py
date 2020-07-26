@@ -2,6 +2,10 @@ from pygeo.objects import Point, Ray, Vector, Sphere, Triangle
 import numpy as np
 
 def intersect(first_object, second_object):
+    """function to check for objects belonging to which class and call the referene function accordingly
+    Input: 
+        first_object    = Should be a Ray object
+        second_object   = Should be a Sphere or Traingle"""
     if isinstance(first_object,Ray) & isinstance(second_object,Sphere):
         d,intercepts=_intersect_ray_with_sphere(first_object, second_object)
         return d,intercepts
@@ -13,11 +17,16 @@ def intersect(first_object, second_object):
         return NotImplemented
 
 def _intersect_ray_with_sphere(ray, sphere):
+
+    """check the intersection between ray and sphere 
+    Returns : points of intersection and number of intersections
+    
+    """
     ray_origin=ray._origin
     ray_direction=ray._direction
     line=ray_direction-ray_origin
     circle_center=sphere._center
-    radius=sphere._radius
+    radius=sphere._radius 
     
 
     a=line*line
@@ -46,7 +55,9 @@ def _intersect_ray_with_sphere(ray, sphere):
 
 
 def _intersect_ray_with_triangle(ray, triangle):
-
+    """check the intersection between ray and Traingle 
+    Returns : points of intersection and number of intersections
+    """
     O=ray._origin
     D=ray._direction
     ray_line=D-O

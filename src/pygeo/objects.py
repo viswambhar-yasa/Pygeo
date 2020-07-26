@@ -3,7 +3,15 @@ import math as m
 import pytest 
 
 class Point:
-    """A point."""
+    """A point.
+    Inputs:     
+        Point       = list of points ex: Point((0,0,0))
+
+    Methods:
+        add         = sum of point and vector 
+        radd        = sum of vector and point
+        sub         = subtraction of point from point 
+        eq          = check for if two points are equal"""
 
     def __init__(self, point):
         self._point = np.array(point, dtype=float)
@@ -34,7 +42,20 @@ class Point:
 
 
 class Vector:
-    """A vector."""
+    """A vector.
+    Inputs:     
+        Vector      = list of vector points ex: Vector((0,0,0))
+
+    Methods:
+        repr        = return the output format for vector class
+        add         = sum of vector and vector 
+        sub         = subtraction of vector from point 
+        cross       = cross product of two vectors
+        magnitude   = return the magnitude of the vector
+        unit_vector = return normalized vector 
+        mul         = dot product of two vectors
+        eq          = check for if two vectors are equal
+        """
 
     def __init__(self, vector):
         self._vector = np.array(vector, dtype=float)
@@ -85,8 +106,15 @@ class Vector:
 
 class Ray(Point,Vector):
     """A ray.
-    origin - input can be an array or point Ex-(0,0,0) or Point((0,1,0))
-    direction -input can be an array or point Ex- (0,1,0) or Point((0,1,0))"""
+    INPUT:
+        origin          = input can be an array or point Ex-(0,0,0) or Point((0,1,0))
+        direction       = input can be an array or point Ex- (0,1,0) or Point((0,1,0))
+    Methods:
+        repr        = return the output format for Ray class
+        unit_vector = returns normalized vector of a ray 
+        magnitude   = return the magnitude of the vector
+        mul         = dot product of two vectors
+        eq          = check for if two Rays are equal"""
 
     def __init__(self,origin,direction): 
         if not isinstance(origin,Point) :
@@ -128,8 +156,15 @@ class Ray(Point,Vector):
 
 class Sphere(Point):
     """A sphere.
-    center - input can be an array or point Ex-(0,0,0) or Point((0,1,0))
-    Radius -input can be an array or point Ex- (0,1,0) or Point((0,1,0))"""
+    INPUT:
+        center       = input can be an array or point Ex-(0,0,0) or Point((0,1,0))
+        Radius       = input can be an array or point Ex- (0,1,0) or Point((0,1,0))
+    Methods:
+        repr        = return the output format for Sphere class
+        area        = returns the area of the sphere 
+        circumfernece   = return the circumference of the sphere
+        eq          = check for if two Spheres are equal
+    """
     def __init__(self,center,radius:float):
         if radius<=0:
             return Exception("Radius cannot be negative or zero")
@@ -140,8 +175,6 @@ class Sphere(Point):
             elif isinstance(center,Point):
                 self._center=center
                 self._radius=radius
-            else:
-                 raise Exception("Invalid input")
        
 
     def __repr__(self):
@@ -163,9 +196,16 @@ class Sphere(Point):
 
 class Triangle(Point,Vector):
     """A triangle. 
-    vertice1 - input can be an array or point Ex-(0,0,0) or Point((0,1,0))
-    vertice2 -input can be an array or point Ex- (0,1,0) or Point((0,1,0))
-    vertice3 -input can be an array or point Ex- (0,1,0) or Point((0,1,0))
+    INPUT:
+        vertice1         = input can be an array or point Ex- (0,0,0) or Point((0,1,0))
+        vertice2         = input can be an array or point Ex- (0,1,0) or Point((0,1,0))
+        vertice3         = input can be an array or point Ex- (0,1,0) or Point((0,1,0))
+    Methods:
+        repr        = return the output format for Triangle class
+        sidelength  = returns the magnitude of the side of the triangle
+        perimeter   = return the perimeter of the triangle
+        area        = return the area of the triangle
+        eq          = check for if two triangles are equal
     """
     def __init__(self,vertice1,vertice2,vertice3): 
         if isinstance(vertice1,Point):
