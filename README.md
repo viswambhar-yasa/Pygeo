@@ -24,10 +24,10 @@ pytest tests
 to run all the tests for `pygeo`.
 
 
-Implenmented Tasks: 
+Implemented Tasks: 
 -----
 
-1. Implementated the missing `Ray` class. A [ray](https://en.wikipedia.org/wiki/Line_(geometry)#Ray) may be represented as its origin and a direction.
+1. Implemented the missing `Ray` class. A [ray](https://en.wikipedia.org/wiki/Line_(geometry)#Ray) may be represented as its origin and a direction.
 
    1. Implemented an `__init__` method that takes the origin and direction as argument and stores them as attributes on the instance.
    1. Implemented a `__repr__` method.
